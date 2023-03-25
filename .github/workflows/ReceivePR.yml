@@ -17,17 +17,17 @@ jobs:
     - name: Install bot
       run: gem install awesome_bot
 
-    - run: echo >> whatchanged.md
-
-    - name: create whatchanged.md
-      run: git diff origin/master origin/${GITHUB_HEAD_REF} -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' >> whatchanged.md
+#    - run: echo >> whatchanged.md
+#
+#    - name: create whatchanged.md
+#      run: git diff origin/master origin/${GITHUB_HEAD_REF} -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' >> whatchanged.md
 
     - name: Run tests
-      run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
+      run: awesome_bot README.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
     - uses: actions/upload-artifact@v3
       with:
         name: ab-results
-        path: ab-results-whatchanged.md-filtered.json
+        path: ab-results-README.md-filtered.json
 
     - uses: actions/setup-python@v4
       with:
@@ -39,7 +39,7 @@ jobs:
         echo ${{ github.event.number }} > ./pr/NR
 
     - name: generate ab-results-output.md
-      run: if test -f "ab-results-whatchanged.md-filtered.json"; then python a.py; fi
+      run: if test -f "ab-results-README.md-filtered.json"; then python a.py; fi
 
     - uses: actions/upload-artifact@v3
       with:
