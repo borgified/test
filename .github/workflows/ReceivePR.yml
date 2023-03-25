@@ -16,7 +16,7 @@ jobs:
       run: gem install awesome_bot
 
     - name: create whatchanged.md
-      run: git diff origin/master -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' > whatchanged.md
+      run: git diff HEAD..master -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' > whatchanged.md
 
     - name: Run tests
       run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
