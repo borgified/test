@@ -12,5 +12,3 @@ heading="""| Line | Status | Link |
 o.write(heading)
 for i in data:
   o.write("|",i['loc'],"|",i['status'],"|",i['link'],"|")
-
-f.close()
