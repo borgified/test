@@ -38,7 +38,13 @@ jobs:
             fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
       - run: unzip pr.zip
 
+      - name: set variables
+        run: |
+          MYNR=$(cat NR)
+          echo "MYNR=$MYNR" >> $GITHUB_ENV
+
       - name: comment PR
         uses: marocchino/sticky-pull-request-comment@v2
+        number: ${{ env.MYNR }}
         with:
           path: ./pr/ab-results-output.md
