@@ -7,7 +7,8 @@ o = open("ab-results-output.md","w")
 data = json.loads(i.read())
 
 heading="""| Line | Status | Link |
-| ---- | ------ | ---- |"""
+| ---- | ------ | ---- |
+"""
 
 o.write(heading)
 for i in data:
