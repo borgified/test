@@ -1,8 +1,7 @@
-name: Tests
+name: Receive PR
 
 on:
   pull_request:
-    branches: [ '*' ]
 
 jobs:
   build:
@@ -31,14 +30,19 @@ jobs:
       with:
         python-version: '3.10'
       if: failure()
+
+    - name: Save PR number
+      if: failure()
+      run: |
+        mkdir -p ./pr
+        echo ${{ github.event.number }} > ./pr/NR
+
     - name: generate ab-results-output.md
       if: failure()
       run: python a.py
 
-    - name: comment PR
-      uses: machine-learning-apps/pr-comment@master
+    - uses: actions/upload-artifact@v2
       if: failure()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: ab-results-output.md
+        name: pr
+        path: pr/

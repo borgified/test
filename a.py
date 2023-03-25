@@ -3,7 +3,7 @@
 import json
 
 i = open("ab-results-README.md-filtered.json","r")
-o = open("ab-results-output.md","w")
+o = open("./pr/ab-results-output.md","w")
 data = json.loads(i.read())
 
 heading="""| Line | Status | Link |
