@@ -2,8 +2,9 @@ name: Tests
 
 on:
   push:
-    branches:
-      - master
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
 
 jobs:
   build:
@@ -23,3 +24,9 @@ jobs:
       with:
         name: ab-results
         path: ab-results-README.md-filtered.json
+    - name: comment PR
+      uses: machine-learning-apps/pr-comment@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        path: ab-results/ab-results-README.md-filtered.json
