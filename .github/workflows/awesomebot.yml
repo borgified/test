@@ -22,10 +22,21 @@ jobs:
       with:
         name: ab-results
         path: ab-results-README.md-filtered.json
+
+    - name: Read/Write data into output.md
+      uses: eddiejaoude/github-actions-reader-writer@v0.1
+      with:
+        json-file-path: 'ab-results-README.md-filtered.json'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        columns: 5
+        object-field-names: '[ "loc", "status", "link", "redirect", "error" ]'
+        file-to-use: 'output.md'
+        html-cell: '<td align="center">{{ loc }} {{status}} {{link}} {{redirect}} {{error}}</td>'
+
     - name: comment PR
       uses: machine-learning-apps/pr-comment@master
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: ab-results-README.md-filtered.json
+        path: output.md
