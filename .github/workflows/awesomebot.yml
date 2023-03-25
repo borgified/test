@@ -31,7 +31,6 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         columns: 5
         object-field-names: '[ "loc", "status", "link", "redirect", "error" ]'
-        file-to-use: 'output.md'
         html-cell: '<td align="center">{{ loc }} {{status}} {{link}} {{redirect}} {{error}}</td>'
 
     - name: comment PR
