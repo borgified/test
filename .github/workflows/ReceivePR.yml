@@ -1,4 +1,4 @@
-name: Receive PR
+name: ReceivePR
 
 on:
   pull_request:

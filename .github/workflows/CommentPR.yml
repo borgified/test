@@ -1,8 +1,8 @@
-name: Comment on the pull request
+name: Comment PR
 
 on:
   workflow_run:
-    workflows: [Receive PR]
+    workflows: [ReceivePR]
     types:
       - completed
 
