@@ -22,7 +22,7 @@ jobs:
 
     - name: Run tests
       run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302 || true
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v3
       with:
         name: ab-results
         path: ab-results-whatchanged.md-filtered.json
@@ -39,7 +39,7 @@ jobs:
     - name: generate ab-results-output.md
       run: python a.py
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: pr
         path: pr/
