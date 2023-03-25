@@ -36,6 +36,8 @@ jobs:
         mkdir -p ./pr
         echo ${{ github.event.number }} > ./pr/NR
 
+    - run: touch ab-results-whatchanged.md-filtered.json
+
     - name: generate ab-results-output.md
       run: python a.py
 
