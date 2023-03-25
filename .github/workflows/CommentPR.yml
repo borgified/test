@@ -6,9 +6,6 @@ on:
     types:
       - completed
 
-permissions:
-  issues: write
-
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -17,7 +14,7 @@ jobs:
       github.event.workflow_run.conclusion == 'success'
     steps:
       - name: 'Download artifact'
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v6
         with:
           script: |
             var artifacts = await github.actions.listWorkflowRunArtifacts({
@@ -40,7 +37,6 @@ jobs:
 
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
-        if: failure()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

@@ -37,7 +37,7 @@ jobs:
         echo ${{ github.event.number }} > ./pr/NR
 
     - name: generate ab-results-output.md
-      run: python a.py
+      run: if test -f "ab-results-whatchanged.md-filtered.json"; then python a.py; fi
 
     - uses: actions/upload-artifact@v3
       with:
