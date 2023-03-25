@@ -21,9 +21,8 @@ jobs:
       run: git diff origin/master origin/${GITHUB_HEAD_REF} -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' > whatchanged.md
 
     - name: Run tests
-      run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
+      run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302 || true
     - uses: actions/upload-artifact@v1
-      if: failure()
       with:
         name: ab-results
         path: ab-results-whatchanged.md-filtered.json
@@ -31,20 +30,16 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-      if: failure()
 
     - name: Save PR number
-      if: failure()
       run: |
         mkdir -p ./pr
         echo ${{ github.event.number }} > ./pr/NR
 
     - name: generate ab-results-output.md
-      if: failure()
       run: python a.py
 
     - uses: actions/upload-artifact@v2
-      if: failure()
       with:
         name: pr
         path: pr/
