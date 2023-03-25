@@ -2,7 +2,7 @@
 
 import json
 
-i = open("ab-results-README.md-filtered.json","r")
+i = open("ab-results-whatchanged.md-filtered.json","r")
 o = open("./pr/ab-results-output.md","w")
 data = json.loads(i.read())
 
