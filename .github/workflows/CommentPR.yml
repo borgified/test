@@ -38,13 +38,18 @@ jobs:
             fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
       - run: unzip pr.zip
 
-      - name: set variables
-        run: |
-          MYNR=$(cat NR)
-          echo "MYNR=$MYNR" >> $GITHUB_ENV
-
-      - name: comment PR
-        uses: marocchino/sticky-pull-request-comment@v2
-        number: "${{ env.MYNR }}"
+      - name: 'Comment on PR'
+        uses: actions/github-script@v3
         with:
-          path: ./pr/ab-results-output.md
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            var fs = require('fs');
+            var issue_number = Number(fs.readFileSync('./NR'));
+            var body = String(fs.readFileSync('./ab-results-output.md'));
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: body
+            });
+
