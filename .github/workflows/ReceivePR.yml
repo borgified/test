@@ -8,19 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.0
     - name: Install bot
       run: gem install awesome_bot
-
-#    - run: echo >> whatchanged.md
-#
-#    - name: create whatchanged.md
-#      run: git diff origin/master origin/${GITHUB_HEAD_REF} -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' >> whatchanged.md
 
     - name: Run tests
       run: awesome_bot README.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
