@@ -21,7 +21,7 @@ jobs:
       run: git diff origin/master origin/${GITHUB_HEAD_REF} -- README.md | grep '^[+]' | grep -Ev '^(--- a/|\+\+\+ b/)' | sed -e 's/^+//' > whatchanged.md
 
     - name: Run tests
-      run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302 || true
+      run: awesome_bot whatchanged.md --request-delay 1 --allow-dupe --white-list igor.io,symfony,toranproxy.com,vagrantup.com,3v4l.org,voicesoftheelephpant.com,drupal.org,oreilly.com,youtube.com,lumen.laravel.com --allow 301,302
     - uses: actions/upload-artifact@v3
       with:
         name: ab-results
