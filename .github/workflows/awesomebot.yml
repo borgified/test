@@ -23,9 +23,12 @@ jobs:
         name: ab-results
         path: ab-results-README.md-filtered.json
 
-    - name: generate ab-results-output.md
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
       if: failure()
-      run: a.py
+    - name: generate ab-results-output.md
+      run: python a.py
 
     - name: comment PR
       uses: machine-learning-apps/pr-comment@master
