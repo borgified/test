@@ -45,6 +45,6 @@ jobs:
 
       - name: comment PR
         uses: marocchino/sticky-pull-request-comment@v2
-        number: ${{ env.MYNR }}
+        number: "${{ env.MYNR }}"
         with:
           path: ./pr/ab-results-output.md
