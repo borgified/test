@@ -25,6 +25,7 @@ jobs:
 
     - name: Read/Write data into output.md
       uses: eddiejaoude/github-actions-reader-writer@v0.1
+      if: failure()
       with:
         json-file-path: 'ab-results-README.md-filtered.json'
         github-token: ${{ secrets.GITHUB_TOKEN }}
