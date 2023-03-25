@@ -28,6 +28,7 @@ jobs:
         python-version: '3.10'
       if: failure()
     - name: generate ab-results-output.md
+      if: failure()
       run: python a.py
 
     - name: comment PR
